@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Templates Download</title>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <div class="template_1">
+                <h3>模板一</h3>
+                <form action="{% url 'templates_download' %}" method="post">
+                {% csrf_token %}
+                {% if error_message %}<p><strong><font color="red">{{ error_message }}</font></strong></p>{% endif %}
+                    <input type="hidden" name="template_id" value="template_1">
+                    <h5>PurchaseDate</h5>
+                    <label for="PurchaseDate">StartDate</label>
+                    <input type="date" name="purchase_start">
+                    <input type="text" name="purchase_start" value="00:00:00">
+                    <br>
+                    <label for="PurchaseDate">EndDate</label>
+                    <input type="date" name="purchase_end">
+                    <input type="text" name="purchase_end" value="00:00:00"><br>
+                    <h5>PaidDate</h5>
+                    <label for="PaidDate">StartDate</label>
+                    <input type="date" name="paid_start">
+                    <input type="text" name="paid_start" value="00:00:00"><br>
+                    <label for="PaidDate">EndDate</label>
+                    <input type="date" name="paid_end">
+                    <input type="text" name="paid_end" value="00:00:00"><br>
+                    <br>
+                    <input type="hidden" name="from_tz" value="America/Los_Angeles">
+                    <input type="hidden" name="to_tz" value="UTC">
+                    <input type="submit" value="下载">
+                </form>
+                </div>
+            </li>
+            <br>
+            <br>
+            <br>
+            <li>
+                <div class="template_2">
+                <h3>模板二</h3><p><font size="2">库存表下载</font></p>
+                <form action="{% url 'inventory_download' %}" method="post">
+                {% csrf_token %}
+                {% if error_message_2 %}<p><strong><font color="red">{{ error_message_2 }}</font></strong></p>{% endif %}
+                    <input type="hidden" name="template_id" value="template_2">
+                    <input type="radio" name="marketplace" value="A2EUQ1WTGCTBG2"><label for="marketplace">Canada</label>
+                    <input type="radio" name="marketplace" value="ATVPDKIKX0DER"><label for="marketplace">USA</label>
+                    <input type="radio" name="marketplace" value="A1AM78C64UM0Y8"><label for="marketplace">Mexico</label>
+                    <br>
+                    <input type="hidden" name="from_tz" value="America/Los_Angeles">
+                    <input type="hidden" name="to_tz" value="UTC">
+                    <input type="submit" value="下载">
+                </form>
+                </div>
+            </li>
+        </ul>
+    </body>
+</html>

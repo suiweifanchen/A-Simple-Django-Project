@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Orders</title>
+    </head>
+    <body>
+        <h3>条件</h3>
+        <form action="{% url 'download' %}" method="post">
+        {% csrf_token %}
+        {% if error_message %}<p><strong><font color="red">{{ error_message }}</font></strong></p>{% endif %}
+            <h5>Select Fields</h5>
+            <table>
+                <tr>
+                {% for field in fields %}
+                <td>
+                <label for="fields"><input type="checkbox" name="fields" value="{{ field }}">{{ field }}</label>
+                </td>
+                {% if forloop.counter|divisibleby:4 %}
+                </tr>
+                <tr>
+                {% endif %}
+                {% endfor %}
+                </tr>
+            </table>
+            <h5>PurchaseDate</h5>
+            <label for="PurchaseDate">StartDate</label>
+            <input type="date" name="purchase_start">
+            <input type="text" name="purchase_start" value="00:00:00">
+            <br>
+            <label for="PurchaseDate">EndDate</label>
+            <input type="date" name="purchase_end">
+            <input type="text" name="purchase_end" value="00:00:00"><br>
+            <h5>PaidDate</h5>
+            <label for="PaidDate">StartDate</label>
+            <input type="date" name="paid_start">
+            <input type="text" name="paid_start" value="00:00:00"><br>
+            <label for="PaidDate">EndDate</label>
+            <input type="date" name="paid_end">
+            <input type="text" name="paid_end" value="00:00:00"><br>
+            <br>
+            <input type="hidden" name="from_tz" value="America/Los_Angeles">
+            <input type="hidden" name="to_tz" value="UTC">
+            <input type="submit" value="下载">
+        </form>
+        <br>
+        <br>
+        <br>
+        <h3>自定义条件</h3>
+        <form action="{% url 'custom_download' %}" method="post">
+        {% csrf_token %}
+        {% if error_message_custom %}<p><strong><font color="red">{{ error_message_custom }}</font></strong></p>{% endif %}
+            <label for="selected_field">Select Fields</label><br>
+            <textarea name="selected_field" rows="4" cols="50">{{ selected_field }}</textarea><br>
+            <label for="select_condition">Conditions</label><br>
+            <textarea name="conditions" rows="4" cols="50">{{ conditions }}</textarea><br>
+            <br>
+            <input type="submit" value="下载">
+        </form>
+    </body>
+</html>
